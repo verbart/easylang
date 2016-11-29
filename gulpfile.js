@@ -10,6 +10,11 @@ const rename = require('gulp-rename');
 const del = require('del');
 const gutil = require('gulp-util');
 const pug = require('gulp-pug');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const uglify = require('gulp-uglify');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -45,6 +50,23 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./public'))
 });
 
+gulp.task('scripts', function() {
+    return browserify({
+        entries: './src/app.js',
+        debug: isDevelopment
+    })
+        .transform(babelify, {presets: ['es2015']})
+        .bundle()
+        .on('error', function(error) {
+            gutil.log(gutil.colors.red('Error: ' + error), '\n', error.codeFrame);
+            this.emit('end');
+        })
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(gulpIf(!isDevelopment, uglify()))
+        .pipe(gulp.dest('./public'));
+});
+
 gulp.task('copy:fonts', function () {
     return gulp.src([
         './node_modules/font-awesome/fonts/**/*.*'
@@ -63,6 +85,7 @@ gulp.task('copy:images', function () {
 gulp.task('watch', function () {
     gulp.watch('./src/**/*.pug', gulp.series('views'));
     gulp.watch('./src/**/*.styl', gulp.series('styles'));
+    gulp.watch('./src/**/*.js', gulp.series('scripts'));
 });
 
 gulp.task('serve', function () {
@@ -83,6 +106,7 @@ gulp.task('build', gulp.series(
     gulp.parallel(
         'views',
         'styles',
+        'scripts',
         'copy:fonts',
         'copy:images'
     )));
