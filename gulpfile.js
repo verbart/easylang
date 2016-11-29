@@ -53,7 +53,7 @@ gulp.task('copy:fonts', function () {
 });
 
 gulp.task('copy:images', function () {
-    return gulp.src('./src/**/*.{png,jpg,gif,svg}')
+    return gulp.src('./src/**/*.{png,jpg,jpeg,gif,svg}')
         .pipe(rename(function (path) {
             path.dirname = '';
         }))
