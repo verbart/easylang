@@ -1,0 +1,56 @@
+.cost
+    background #fff
+    padding-top 20px
+    padding-bottom 40px
+    &__wrap
+        position relative
+    &__table
+        &:after
+            content ''
+            display block
+            position absolute
+            top 0
+            bottom 0
+            right 0
+            left 25%
+            border 2px solid #20ac65
+            border-radius 5px
+            box-shadow 0 0 4px rgba(0, 0, 0, .1)
+            z-index 1
+        th, td
+            text-align center
+            vertical-align middle
+            color #222
+            border-top 1px solid #ddd
+            border-bottom 1px solid #ddd
+            width 20%
+            padding 20px
+        th
+            font-weight 400
+            font-size 20px
+        td
+            font-weight 200
+            font-size 16px
+            color #888
+        tr:first-child th:first-child, tr:last-child td
+            border-bottom none
+        th:first-child, td:first-child
+            font-size 16px
+            font-weight 400
+            color #222
+            background transparent
+            text-align left
+
+    &__separator td
+        font-weight 400
+        background #e9eff2
+        padding 5px 0
+        color #333
+        &:first-child
+            border none
+            background none
+    &__month
+        td
+            font-weight 500
+            font-size 18px
+            color #20ac65
