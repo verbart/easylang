@@ -26,7 +26,7 @@ gulp.task('views', function buildHTML() {
             gutil.log(gutil.colors.red('Error: ' + error.message));
             this.emit('end');
         })
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('styles', function () {
@@ -47,7 +47,7 @@ gulp.task('styles', function () {
         .pipe(gulpIf(isDevelopment, sourcemaps.write()))
         .pipe(gulpIf(!isDevelopment, cleanCSS()))
         .pipe(rename('style.css'))
-        .pipe(gulp.dest('./public/css'))
+        .pipe(gulp.dest('./dist/css'))
 });
 
 gulp.task('scripts', function() {
@@ -64,14 +64,14 @@ gulp.task('scripts', function() {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(gulpIf(!isDevelopment, uglify()))
-        .pipe(gulp.dest('./public/js'));
+        .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('copy:fonts', function () {
     return gulp.src([
         './node_modules/font-awesome/fonts/**/*.*'
     ])
-        .pipe(gulp.dest('./public/fonts'));
+        .pipe(gulp.dest('./dist/fonts'));
 });
 
 gulp.task('copy:images', function () {
@@ -79,7 +79,7 @@ gulp.task('copy:images', function () {
         .pipe(rename(function (path) {
             path.dirname = '';
         }))
-        .pipe(gulp.dest('./public/images'));
+        .pipe(gulp.dest('./dist/images'));
 });
 
 gulp.task('watch', function () {
@@ -90,15 +90,15 @@ gulp.task('watch', function () {
 
 gulp.task('serve', function () {
     browserSync.init({
-        server: './public',
+        server: './dist',
         port: 8080
     });
 
-    browserSync.watch('./public/**/*.*').on('change', browserSync.reload);
+    browserSync.watch('./dist/**/*.*').on('change', browserSync.reload);
 });
 
 gulp.task('clean', function () {
-    return del('./public')
+    return del('./dist')
 });
 
 gulp.task('build', gulp.series(
