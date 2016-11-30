@@ -1,0 +1,16 @@
+.accordion
+  &__title
+    display inline-block
+    margin-bottom 15px
+    padding-top 5px
+    padding-bottom 5px
+    color #20ac65
+    border-bottom 1px dashed
+    cursor pointer
+    &_active + .accordion__content
+      height auto
+      padding-bottom 15px
+  &__content
+    height 0
+    overflow hidden
+    transition .4s
