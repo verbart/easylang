@@ -47,7 +47,7 @@ gulp.task('styles', function () {
         .pipe(gulpIf(isDevelopment, sourcemaps.write()))
         .pipe(gulpIf(!isDevelopment, cleanCSS()))
         .pipe(rename('style.css'))
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./public/css'))
 });
 
 gulp.task('scripts', function() {
@@ -64,7 +64,7 @@ gulp.task('scripts', function() {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(gulpIf(!isDevelopment, uglify()))
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('copy:fonts', function () {
