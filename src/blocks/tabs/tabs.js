@@ -1,14 +1,14 @@
 import $ from 'jquery';
 
-let activeTab = $('.tabs__title__active').data('tab-id');
+let activeTab = $('.tabs__title_active').data('tab-id');
 
 openTab(activeTab);
 
 $('.tabs__title').click(function () {
     activeTab = $(this).data('tab-id');
 
-    $('.tabs__title__active').removeClass('tabs__title__active');
-    $(this).addClass('tabs__title__active');
+    $('.tabs__title_active').removeClass('tabs__title_active');
+    $(this).addClass('tabs__title_active');
     $('.tabs__content_active').removeClass('tabs__content_active');
 
     openTab(activeTab);
