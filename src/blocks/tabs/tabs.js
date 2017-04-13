@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-let activeTab = $('.tabs__title__active').data('tab-id');
+let activeTab = $('.tabs__title_active').data('tab-id');
 
 openTab(activeTab);
 
